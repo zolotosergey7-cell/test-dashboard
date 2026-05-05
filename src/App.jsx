@@ -4,6 +4,7 @@ import { supabase } from './lib/supabase'
 import LoginPage from './pages/LoginPage'
 import Layout from './components/Layout'
 import UploadPage from './pages/admin/UploadPage'
+import DashboardPage from './pages/DashboardPage'
 
 function App() {
   const [session, setSession] = useState(undefined)
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={!session ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/" element={session ? <Layout><div style={{ color: '#e8eaf0' }}>Дашборд загружается...</div></Layout> : <Navigate to="/login" />} />
         <Route path="/admin/upload" element={session ? <Layout><UploadPage /></Layout> : <Navigate to="/login" />} />
+        <Route path="/" element={session ? <Layout><DashboardPage /></Layout> : <Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   )
