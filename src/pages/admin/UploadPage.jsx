@@ -34,9 +34,9 @@ export default function UploadPage() {
       if (!employees.length) throw new Error('Не найдена колонка "ФИО"')
 
       // Upsert по full_name — обновляем если уже есть
-       const { error } = await supabase
-      .from('employees')
-       .insert(employees)
+      const { error } = await supabase
+        .from('employees')
+        .upsert(employees, { onConflict: 'full_name', ignoreDuplicates: true })
 
       if (error) throw error
 
